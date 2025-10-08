@@ -167,6 +167,8 @@ CALCULATE(
 
 <img width="1205" height="679" alt="Image" src="https://github.com/user-attachments/assets/fe388de8-6b33-48b5-8238-2e7bfa2087e3" />
 
+<img width="1204" height="682" alt="Image" src="https://github.com/user-attachments/assets/5da8e190-9f59-4606-bae8-52d9313547fd" />
+
 ---
 ## 🔍 Principais Insights Operacionais e de Experiência
 
