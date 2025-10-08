@@ -32,8 +32,9 @@ Propor melhorias estratégicas com base em evidências.
 ## 🧪 Fonte dos Dados
 
 - Plataforma: Kaggle  
-- Dataset: [Nome do arquivo ou link]  
+- Dataset: Uber
 - Tipo: Dados públicos de viagens realizadas pela UBER
+- Link: https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard
 
 ---
 
