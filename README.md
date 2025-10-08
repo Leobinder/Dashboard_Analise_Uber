@@ -165,7 +165,7 @@ CALCULATE(
 
 <img width="1206" height="671" alt="Image" src="https://github.com/user-attachments/assets/8ee8d3d1-6ca9-44e8-9538-230c74b5e408" />
 
-<img width="1205" height="679" alt="Image" src="https://github.com/user-attachments/assets/fe388de8-6b33-48b5-8238-2e7bfa2087e3" />
+<img width="1202" height="676" alt="Image" src="https://github.com/user-attachments/assets/b3859a49-5e11-498c-8c9a-25ee456f4206" />
 
 <img width="1204" height="682" alt="Image" src="https://github.com/user-attachments/assets/5da8e190-9f59-4606-bae8-52d9313547fd" />
 
