@@ -163,6 +163,8 @@ CALCULATE(
 
 > Aqui você pode adicionar imagens do seu dashboard ou gráficos gerados.
 
+<img width="1205" height="679" alt="Image" src="https://github.com/user-attachments/assets/fe388de8-6b33-48b5-8238-2e7bfa2087e3" />
+
 ---
 ## 🔍 Principais Insights Operacionais e de Experiência
 
