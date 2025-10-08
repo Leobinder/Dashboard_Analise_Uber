@@ -163,7 +163,7 @@ CALCULATE(
 
 > Aqui você pode adicionar imagens do seu dashboard ou gráficos gerados.
 
-<img width="1206" height="671" alt="Image" src="https://github.com/user-attachments/assets/01060c3b-0bf7-47b4-85a2-4d17ae220ea1" />
+<img width="1206" height="671" alt="Image" src="https://github.com/user-attachments/assets/8ee8d3d1-6ca9-44e8-9538-230c74b5e408" />
 
 <img width="1205" height="679" alt="Image" src="https://github.com/user-attachments/assets/fe388de8-6b33-48b5-8238-2e7bfa2087e3" />
 
