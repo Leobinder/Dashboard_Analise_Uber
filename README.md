@@ -1,48 +1,49 @@
 # 🚖 Dashboard Power BI – Análise de Viagens na UBER
 
+[📊 **Clique aqui para visualizar o Dashboard completo em PDF**](./Assets/uber-meu.pdf)
+
 ## 📌 Problema de negócio 
 
 A UBER enfrenta desafios operacionais que afetam diretamente a conclusão das viagens e a confiabilidade do serviço. Cancelamentos frequentes e avaliações negativas comprometem a experiência dos usuários e motoristas, impactando a lucratividade da plataforma.
 
 A proposta deste projeto é utilizar dados reais para:
+* Diagnosticar os principais gargalos operacionais.
+* Entender os padrões de uso e comportamento dos clientes.
+* Avaliar a eficiência financeira das viagens.
+* Propor melhorias estratégicas com base em evidências.
 
-Diagnosticar os principais gargalos operacionais.
-Entender os padrões de uso e comportamento dos clientes.
-Avaliar a eficiência financeira das viagens.
-Propor melhorias estratégicas com base em evidências.
-
-
-
-----
+---
 
 ## 📌 Objetivos da Análise
 
-```
-1. Entender o Público-Alvo e o Propósito da Análise = Apresentar insights relevantes para profissionais de mobilidade urbana, planejamento estratégico e análise de dados.
+1. **Entender o Público-Alvo e o Propósito da Análise:** Apresentar insights relevantes para profissionais de mobilidade urbana, planejamento estratégico e análise de dados.
+2. **Explorar Fontes de Dados Confiáveis:** Utilizar dados públicos da plataforma Kaggle, com linguagem acessível e estrutura clara para públicos técnicos e não técnicos.
+3. **Analisar Indicadores-Chave de Desempenho (KPIs):** Foco em taxas de cancelamento, desempenho por tipo de veículo, métodos de pagamento e avaliações de motoristas e clientes.
+4. **Apoiar a Tomada de Decisão Estratégica:** Gerar insights que contribuam para ações operacionais e estratégicas voltadas à melhoria da eficiência e da satisfação dos usuários.
 
-2. Explorar Fontes de Dados Confiáveis = Utilizar dados públicos da plataforma Kaggle, com linguagem acessível e estrutura clara para públicos técnicos e não técnicos.
-
-3. Analisar Indicadores-Chave de Desempenho (KPIs) = Foco em taxas de cancelamento, desempenho por tipo de veículo, métodos de pagamento e avaliações de motoristas e clientes.
-
-4. Apoiar a Tomada de Decisão Estratégica = Gerar insights que contribuam para ações operacionais e estratégicas voltadas à melhoria da eficiência e da satisfação dos usuários.
-
-``` 
 ---
 
 ## 🧪 Fonte dos Dados
 
-- Plataforma: Kaggle  
-- Dataset: Uber
-- Tipo: Dados públicos de viagens realizadas pela UBER
-- Link: https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard
+- **Plataforma:** Kaggle  
+- **Dataset:** Uber
+- **Tipo:** Dados públicos de viagens realizadas pela UBER
+- **Link:** [Uber Ride Analytics Dashboard](https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard)
 
 ---
 
 ## 🛠 Tecnologias Utilizadas
 
 - Power BI (Modelagem, DAX, Power Query)
+- Python (Pandas, Numpy para ETL)
+- Jupyter Notebook
 - Kaggle (Fonte de dados)
-- Visualizações interativas e responsivas
+
+---
+
+## 🐍 Engenharia e Preparação de Dados (ETL)
+
+Os dados brutos passaram por um rigoroso processo de limpeza, tipagem e engenharia de features utilizando Python. A construção das dimensões temporais (dias úteis, horários, meses) e o tratamento de nulos podem ser conferidos detalhadamente no nosso [Notebook de ETL/EDA aqui](./notebooks/etl_uber.ipynb).
 
 ---
 
@@ -51,36 +52,67 @@ Propor melhorias estratégicas com base em evidências.
 Este projeto inclui fórmulas DAX avançadas para gerar indicadores relevantes. Abaixo estão as 7 principais métricas utilizadas:
 
 1. **Receita Média por Cliente**
+
 <pre>
+
 Receita Média por Cliente = 
+
 VAR TotalReceita = 
+
     CALCULATE(
+
         SUM(Uber[Valor viagem]),
+
         Uber[STATUS DA VIAGEM] = "completed"
+
     )
+
 VAR TotalClientes = 
+
     CALCULATE(
+
         DISTINCTCOUNT(Uber[Customer ID]),
+
         Uber[STATUS DA VIAGEM] = "completed"
+
     )
+
 RETURN 
+
     DIVIDE(TotalReceita, TotalClientes)
+
 </pre>
+
+
 
 2. **Receita Média por Minuto**
+
 <pre>
+
 Receita Média por Minuto =
+
 CALCULATE(
+
     DIVIDE(
+
         SUM(Uber[Valor viagem]),
+
         SUM(Uber[Duração média viagem])
+
     ),
+
     Uber[STATUS DA VIAGEM] = "completed"
+
 )
+
 </pre>
 
+
+
 3. **Gasto Médio por KM por Corrida**
+
 <pre>
+
 GastoMedioPorKMporCorrida =
 AVERAGEX(
     FILTER('Uber', 'Uber'[STATUS DA VIAGEM] = "Completed"),
@@ -89,6 +121,7 @@ AVERAGEX(
 </pre>
 
 4. **Taxa de Cancelamento**
+
 <pre>
 Taxa de Cancelamento =
 DIVIDE(
@@ -99,6 +132,7 @@ DIVIDE(
 </pre>
 
 5. **% Receita do Maior Dia**
+
 <pre>
   % Receita do Maior Dia =
 VAR ReceitaPorDia =
@@ -117,49 +151,82 @@ VAR ReceitaTotal =
         SUM('Uber'[Valor viagem]),
         'Uber'[STATUS DA VIAGEM] = "completed"
     )
+
 RETURN
     DIVIDE(MaiorReceita, ReceitaTotal)
-
 </pre>
+
+
 
 6. **Crescimento Financeiro Mensal**
+
 <pre>
+
 Crescimento Financeiro Mensal =
+
 VAR ReceitaAtual = [Receita Mensal]
+
 VAR ReceitaAnterior =
+
     CALCULATE(
+
         [Receita Mensal],
+
         DATEADD(Uber[DIA], -1, MONTH)
+
     )
+
 RETURN
+
     DIVIDE(ReceitaAtual - ReceitaAnterior, ReceitaAnterior, 0)
+
 </pre>
 
+
+
 7. **Horário com Maior Receita Média**
+
 <pre>
+
 Horário com Maior Receita Média =
+
 CALCULATE(
+
     MAX(Uber[Pico Horario]),
+
     TOPN(
+
         1,
+
         ADDCOLUMNS(
+
             VALUES(Uber[Pico Horario]),
+
             "ReceitaMedia",
+
             CALCULATE(
+
                 AVERAGE(Uber[Valor viagem]),
+
                 Uber[STATUS DA VIAGEM] = "completed"
+
             )
+
         ),
+
         [ReceitaMedia], DESC
+
     )
+
 )
+
 </pre>
+
 
 > Todos os códigos completos estão disponíveis na pasta `DAX_Metrics`.
 
 
 ---
-
 ## 📊 Visualizações
 
 > Aqui você pode adicionar imagens do seu dashboard ou gráficos gerados.
@@ -242,7 +309,20 @@ Este projeto demonstra como a análise de dados pode ser uma ferramenta poderosa
 - Criar alertas automáticos para viagens com alto risco de cancelamento
 - Integrar dados em tempo real via API
 
-
-
+---
 
 ## 📁 Estrutura do Projeto
+
+</pre>
+📦 Dashboard_Analise_Uber
+ ┣ 📂 Assets
+ ┃ ┣ 📜 uber-meu.pdf
+ ┃ ┣ 🖼️ 498635199-5da8e190-9f59-4606-bae8-52d9313547fd.png
+ ┃ ┣ 🖼️ 498636349-8ee8d3d1-6ca9-44e8-9538-230c74b5e408.png
+ ┃ ┗ 🖼️ 498636513-b3859a49-5e11-498c-8c9a-25ee456f4206.png
+ ┣ 📂 notebooks
+ ┃ ┗ 📓 etl_uber.ipynb
+ ┣ 📂 DAX_Metrics
+ </pre>
+ ┃ ┗ 📜 [Arquivos de Fórmulas DAX]
+ ┗ 📜 README.md
