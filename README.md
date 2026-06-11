@@ -56,31 +56,18 @@ Este projeto inclui fórmulas DAX avançadas para gerar indicadores relevantes. 
 <pre>
 
 Receita Média por Cliente = 
-
 VAR TotalReceita = 
-
     CALCULATE(
-
         SUM(Uber[Valor viagem]),
-
         Uber[STATUS DA VIAGEM] = "completed"
-
     )
-
 VAR TotalClientes = 
-
     CALCULATE(
-
         DISTINCTCOUNT(Uber[Customer ID]),
-
         Uber[STATUS DA VIAGEM] = "completed"
-
     )
-
 RETURN 
-
     DIVIDE(TotalReceita, TotalClientes)
-
 </pre>
 
 
@@ -90,19 +77,12 @@ RETURN
 <pre>
 
 Receita Média por Minuto =
-
 CALCULATE(
-
     DIVIDE(
-
         SUM(Uber[Valor viagem]),
-
         SUM(Uber[Duração média viagem])
-
     ),
-
     Uber[STATUS DA VIAGEM] = "completed"
-
 )
 
 </pre>
@@ -165,23 +145,16 @@ RETURN
 Crescimento Financeiro Mensal =
 
 VAR ReceitaAtual = [Receita Mensal]
-
 VAR ReceitaAnterior =
-
     CALCULATE(
-
         [Receita Mensal],
-
         DATEADD(Uber[DIA], -1, MONTH)
-
     )
-
+    
 RETURN
-
     DIVIDE(ReceitaAtual - ReceitaAnterior, ReceitaAnterior, 0)
 
 </pre>
-
 
 
 7. **Horário com Maior Receita Média**
@@ -191,35 +164,20 @@ RETURN
 Horário com Maior Receita Média =
 
 CALCULATE(
-
     MAX(Uber[Pico Horario]),
-
     TOPN(
-
         1,
-
         ADDCOLUMNS(
-
             VALUES(Uber[Pico Horario]),
-
             "ReceitaMedia",
-
             CALCULATE(
-
                 AVERAGE(Uber[Valor viagem]),
-
                 Uber[STATUS DA VIAGEM] = "completed"
-
             )
-
         ),
-
         [ReceitaMedia], DESC
-
     )
-
 )
-
 </pre>
 
 
@@ -314,6 +272,7 @@ Este projeto demonstra como a análise de dados pode ser uma ferramenta poderosa
 ## 📁 Estrutura do Projeto
 
 </pre>
+
 📦 Dashboard_Analise_Uber
  ┣ 📂 Assets
  ┃ ┣ 📜 uber-meu.pdf
@@ -323,6 +282,7 @@ Este projeto demonstra como a análise de dados pode ser uma ferramenta poderosa
  ┣ 📂 notebooks
  ┃ ┗ 📓 etl_uber.ipynb
  ┣ 📂 DAX_Metrics
+ 
  </pre>
  ┃ ┗ 📜 [Arquivos de Fórmulas DAX]
  ┗ 📜 README.md
